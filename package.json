@@ -13,6 +13,12 @@
   "license": "ISC",
   "dependencies": {
     "chai": "^4.1.2",
+    "express": "^4.16.0",
     "mocha": "^3.5.3"
+  },
+
+  "homepage": "file:///Users/brookin8/AwesomeInc/js-calculator/app/index.html",
+  "dependencies": {
+    "express": "^4.15.4"
   }
 }
