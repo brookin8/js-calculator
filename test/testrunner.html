@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Mocha Tests</title>
+	<!-- Found in the node modules folder: CSS sheets-->
+	<link rel="stylesheet" href="../node_modules/mocha/mocha.css">
+</head>
+
+<body>
+
+<div id="display" style="display:none !important;"></div>
+<div id = "solarPanel"></div>
+
+
+<div id="mocha"></div>
+
+<!-- start the test suite -->
+
+<script src="../node_modules/mocha/mocha.js"></script>
+<script src="../node_modules/chai/chai.js"></script>
+<script>mocha.setup('bdd');</script>
+
+<script src = '../app/main.js'></script>
+<script src = 'testCalculatorFunctions.js'></script>
+
+<!-- put test scripts here (tests we have written using our functions) -->
+<script src = 'testArray.js'></script>
+
+<script>
+	mocha.run();
+</script>
+
+</body>
+</html>
