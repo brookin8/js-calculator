@@ -5,7 +5,7 @@ var keys = document.getElementsByClassName('key');
 var value1;
 var value2;
 var selectedOperator; 
-var equalOn = false;
+var lastKeyPressed = '';
 
 
 
@@ -29,9 +29,9 @@ function ButtonLogic () {
 	
 	//Number Button Logic
 	if(this.classList.contains('numeric')) { //Checks to see if the button pushed is of the numeric class
-		numeric(keyLabel);
+		numeric(keyLabel, lastKeyPressed);
 	} else if (this.classList.contains('decimal')) {
-		decimal(keyLabel);
+		decimal(keyLabel, lastKeyPressed);
 	} else if (this.classList.contains('operator')) {
 		operate(keyLabel);
 	} else if (this.classList.contains('allclear')) {
@@ -40,10 +40,11 @@ function ButtonLogic () {
 		clear();
 	} else if (this.classList.contains('calculate')) {
 		calculate();
-		equalOn = true;
 	} else if (this.classList.contains('plusMinus')) {
 		plusMinus();
 	}
+
+	lastKeyPressed = keyLabel;
 }
 
 
@@ -71,11 +72,10 @@ function plusMinus() {
 
 
 //Function 
-function numeric(keyLabel) {
+function numeric(keyLabel, lastKeyPressed) {
 
-	if(equalOn) {
+	if(lastKeyPressed === '=') {
 		allClear();
-		equalOn = false;
 	}
 
 	if(selectedOperator === '') {
@@ -96,11 +96,10 @@ function properAppend(main, added) {
 }
 
 //Function
-function decimal(keyLabel) {
+function decimal(keyLabel, lastKeyPressed) {
 	
-	if(equalOn) {
+	if(lastKeyPressed === "=") {
 		allClear();
-		equalOn = false;
 	}
 
 	if(selectedOperator === '') { //Still in value 1
@@ -130,7 +129,7 @@ function decimal(keyLabel) {
 //Function operate
 function operate(keyLabel) {
 if(value1 === '') { //If value1 is empty
-	value1 = 0; //Set value1 = 0
+	value1 = '0'; //Set value1 = 0
 	selectedOperator = keyLabel; //Pressed operator is now 'selected operator' value
 
 } else { //If value1 is NOT empty 
@@ -139,7 +138,6 @@ if(value1 === '') { //If value1 is empty
 		} else { //Value1 is NOT empty AND selectedOperator is NOT empty
 			if(value2 === '') { //AND value2 is empty
 				selectedOperator = keyLabel; //selectedOperator is replaced with the most recently pressed operator button
-
 			} else { //Value1 is NOT empty AND selectedOperator is NOT empty AND value2 is NOT empty
 				calculate();
 				selectedOperator = keyLabel; //Store the most recently pressed operator in selectedOperator
@@ -170,7 +168,7 @@ function allClear () { //Needs to be tested
 
 function calculate() {
 	
-	var results = '0';
+	var results = 0;
 
 	switch (selectedOperator) { //Case statement to assign a math function to each operator button (which are strings)
 		case "+":
